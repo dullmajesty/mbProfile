@@ -1,20 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native'; 
+import { createNativeStackNavigator } from '@react-navigation/native-stack'; 
+import 'react-native-gesture-handler';
+import Profile from './content/Profile';
+import Settings from './content/Settings';
+import ManageUser from './content/ManageUser';
+import Logout from './content/Logout';
 
-export default function App() {
+const Stack = createNativeStackNavigator(); 
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+    <NavigationContainer> 
+      <Stack.Navigator initialRouteName="Profile">
+        <Stack.Screen name="Profile" component={Profile} options={{ headerShown: false }} />
+        <Stack.Screen name="Settings" component={Settings} />
+        <Stack.Screen name="ManageUser" component={ManageUser} />
+        <Stack.Screen name="Logout" component={Logout} />
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+
+
+// Make sure to wrap App with ThemeProvider here
+export default App;
+  
